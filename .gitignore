@@ -1,0 +1,19 @@
+# Ignore datasets
+data/
+
+# Ignore Python cache
+__pycache__/
+*.py[cod]
+
+# Ignore Jupyter checkpoints
+.ipynb_checkpoints/
+
+# Ignore model files
+*.pt
+*.pth
+*.h5
+
+# VSCode settings (optional)
+.vscode/
+myenv/
+
