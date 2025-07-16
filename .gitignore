@@ -15,5 +15,5 @@ __pycache__/
 
 # VSCode settings (optional)
 .vscode/
-myenv/
+venv/
 
