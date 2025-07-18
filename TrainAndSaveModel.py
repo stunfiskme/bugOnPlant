@@ -37,7 +37,7 @@ print("Saved a sample image to 'sample_batch.png'.")
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.AdamW(model.parameters(), lr=0.0001, weight_decay=1e-4)
 #if the loss hasnt decrease in 5 epochs then reduce the lr
-scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, patience=5, verbose=True)
+scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, patience=5)
 #stop training if model isnt improving 
 early_stopping = EarlyStopping(patience=5, delta=0.01, verbose=True)
 
@@ -59,7 +59,6 @@ for epoch in range(EPOCHS):
         inputs = inputs.to(device)
         labels = labels.to(device)
         # zero the parameter gradients
-        optimizer.zero_grad()
         outputs = model(inputs)  # forward 
         loss = criterion(outputs, labels) #  backward
         loss.backward() # optimize
@@ -99,7 +98,8 @@ for epoch in range(EPOCHS):
             "Val_loss": val_loss / (i + 1),
             "acc": 100. * correct / total
             })
-    #/try this in unfer 52% acc still
+
+    #/try this if under 52% acc still
     # if you're using adam/adamw, include a warmup and some annealing
     # Step LR scheduler with avg val loss
     avg_val_loss = val_loss / len(validation_dataloader)

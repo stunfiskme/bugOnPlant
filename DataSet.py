@@ -1,16 +1,7 @@
 import os
 from PIL import Image
-import torch
-import torch.nn as nn
-import torch.nn.functional as F
-import torch.optim as optim
 from torchvision import models, transforms
-from tqdm import tqdm
 from torch.utils.data import Dataset, DataLoader
-import matplotlib
-matplotlib.use("Agg") 
-import matplotlib.pyplot as plt
-import torchvision.transforms.functional as Fu
 from Model import Net
 
 
@@ -54,7 +45,7 @@ color_jitter = transforms.ColorJitter(
 # Transform: resize and convert to tensor
 # Compose: do everything below in order as listed
 transform = transforms.Compose([
-    transforms.Resize((224,224)),        
+    transforms.Resize((256,256)),        
     transforms.ToTensor(),
     transforms.Normalize(                          # maps [0,1]→[-1,1]
         mean=(0.5, 0.5, 0.5), 
@@ -63,7 +54,7 @@ transform = transforms.Compose([
 ])
 
 train_transform = transforms.Compose([
-    transforms.Resize((224,224)),        
+    transforms.Resize((256,256)),        
     transforms.RandomHorizontalFlip(p=0.5), 
     transforms.RandomVerticalFlip(p=0.5),
     transforms.RandomApply([gaussian_blur], 0.5),
